@@ -1,0 +1,29 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.7 }
+
+\bibitem[Associa{\c c}{\~a}o Brasileira de Normas T{\'e}cnicas 2023]{nbr10520}
+\abntrefinfo{ABNT}{ABNT}{2023}
+{ASSOCIA{\c C}{\~A}O BRASILEIRA DE NORMAS T{\'E}CNICAS. \emph{{ABNT NBR} 10520:
+  Informa{\c c}{\~a}o e documenta{\c c}{\~a}o: cita{\c c}{\~o}es em documentos:
+  apresenta{\c c}{\~a}o}.
+Rio de Janeiro, 2023. 19~p.}
+
+\bibitem[Associa{\c c}{\~a}o Brasileira de Normas T{\'e}cnicas 2024]{nbr14724}
+\abntrefinfo{ABNT}{ABNT}{2024}
+{ASSOCIA{\c C}{\~A}O BRASILEIRA DE NORMAS T{\'E}CNICAS. \emph{{ABNT NBR} 14724:
+  Informa{\c c}{\~a}o e documenta{\c c}{\~a}o: trabalhos acad{\^e}micos:
+  apresenta{\c c}{\~a}o}.
+Rio de Janeiro, 2024. 12~p.}
+
+\bibitem[Associa{\c c}{\~a}o Brasileira de Normas T{\'e}cnicas 2025]{nbr6023}
+\abntrefinfo{ABNT}{ABNT}{2025}
+{ASSOCIA{\c C}{\~A}O BRASILEIRA DE NORMAS T{\'E}CNICAS. \emph{{ABNT NBR} 6023:
+  Informa{\c c}{\~a}o e documenta{\c c}{\~a}o: refer{\^e}ncias: elabora{\c
+  c}{\~a}o}.
+Rio de Janeiro, 2025. 68~p.}
+
+\end{thebibliography}
