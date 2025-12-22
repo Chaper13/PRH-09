@@ -1,0 +1,288 @@
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% Modelo de TCC baseado nas normas ABNT (NBR 14724, 10520, 6023, etc.)
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+
+\documentclass[
+    % -- opções da classe memoir --
+    12pt,               % Tamanho da fonte (NBR 14724)
+    openright,          % Capítulos começam em página ímpar (frente)
+    twoside,            % Impressão frente e verso
+    a4paper,            % Tamanho do papel
+    % -- opções do pacote babel --
+    english,            % Idioma adicional para hifenização
+    brazil              % O último idioma é o principal do documento
+]{abntex2}
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage{lmodern}            % Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}        % Seleção de códigos de fonte.
+\usepackage[utf8]{inputenc}     % Codificação do arquivo (inclui acentos)
+\usepackage{indentfirst}        % Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}              % Controle das cores
+\usepackage{graphicx}           % Inclusão de gráficos
+\usepackage{microtype}          % Para melhorias de justificação
+\usepackage{booktabs}           % Para tabelas estilo IBGE (linhas horizontais apenas)
+
+% ---
+% Pacotes de citações (NBR 10520 e NBR 6023)
+% ---
+\usepackage[alf]{abntex2cite}   % Citações sistema ALFABÉTICO (Autor, Data)
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO (NBR 14724)
+% ---
+\titulo{Título do Seu Trabalho: Subtítulo se houver}
+\autor{Seu Nome Completo}
+\local{Rio de Janeiro}
+\data{2024}
+\orientador{Prof. Dr. Nome do Orientador}
+\instituicao{%
+  Universidade Federal do Rio de Janeiro -- UFRJ
+  \par
+  Faculdade de XXXXX
+  \par
+  Programa de Graduação em XXXXX}
+\tipotrabalho{Trabalho de Conclusão de Curso (Graduação)}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{Trabalho de Conclusão de Curso apresentado ao Curso de [Nome do Curso] da [Instituição], como requisito parcial para obtenção do grau de Bacharel.}
+
+% ---
+% Configurações de aparência do PDF final
+% ---
+\definecolor{blue}{RGB}{41,5,195}
+\makeatletter
+\hypersetup{
+    pdftitle={\@title}, 
+    pdfauthor={\@author},
+    pdfsubject={\imprimirpreambulo},
+    pdfcreator={LaTeX with abnTeX2},
+    colorlinks=true,       % false: box links; true: colored links
+    linkcolor=blue,        % cor dos links internos
+    citecolor=blue,        % cor dos links para a bibliografia
+    filecolor=magenta,      % cor dos links para arquivos
+    urlcolor=blue,
+    bookmarksdepth=4
+}
+\makeatother
+
+% ---
+% Compila o índice
+% ---
+\makeindex
+
+% ------------------------------------------------------------------------
+% INÍCIO DO DOCUMENTO
+% ------------------------------------------------------------------------
+\begin{document}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS (NBR 14724)
+% ----------------------------------------------------------
+\pretextual
+
+% Capa
+\imprimircapa
+
+% Folha de rosto
+\imprimirfolhaderosto
+
+% ---
+% Folha de aprovação (Exemplo)
+% ---
+\begin{folhadeaprovacao}
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
+    \end{center}
+    \vspace*{\fill}
+    
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+   \end{center}
+        
+   Trabalho aprovado. \imprimirlocal, 22 de dezembro de 2024:
+
+   \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
+   \assinatura{\textbf{Prof. Convidado 1} \\ UFRJ}
+   \assinatura{\textbf{Prof. Convidado 2} \\ UFRJ}
+   %\assinatura{\textbf{Professor} \\ Convidado 3}
+      
+   \begin{center}
+      \vspace*{0.5cm}
+      {\large\imprimirlocal}
+      \par
+      {\large\imprimirdata}
+      \vspace*{1cm}
+   \end{center}
+\end{folhadeaprovacao}
+
+% ---
+% Dedicatória
+% ---
+\begin{dedicatoria}
+   \vspace*{\fill}
+   \centering
+   \noindent
+   \textit{Este trabalho é dedicado às crianças adultas que,\\
+   quando pequenas, sonharam em se tornar cientistas.} \vspace*{1.5cm}
+\end{dedicatoria}
+
+% ---
+% Agradecimentos
+% ---
+\begin{agradecimentos}
+Agradeço primeiramente ao meu orientador...
+
+Aos meus pais...
+\end{agradecimentos}
+
+% ---
+% Epígrafe
+% ---
+\begin{epigrafe}
+    \vspace*{\fill}
+	\begin{flushright}
+		\textit{``Não vos amoldeis às estruturas deste mundo, \\
+		mas transformai-vos pela renovação da mente.''\\
+		(Romanos 12:2)}
+	\end{flushright}
+\end{epigrafe}
+
+% ---
+% RESUMO (NBR 6028)
+% ---
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}
+ Este é o resumo do trabalho. 
+ Segundo a NBR 6028, deve ser um parágrafo único, conciso, contendo objetivo, método, resultados e conclusões. 
+ Deve ter entre 150 e 500 palavras para teses e dissertações/TCCs.
+ 
+ \textbf{Palavras-chave}: Latex. ABNT. Editoração de texto.
+\end{resumo}
+
+% ---
+% ABSTRACT (Em inglês)
+% ---
+\begin{resumo}[Abstract]
+ \begin{otherlanguage*}{english}
+   This is the abstract in English.
+ 
+   \textbf{Keywords}: Latex. ABNT. Text editing.
+ \end{otherlanguage*}
+\end{resumo}
+
+% ---
+% Listas de ilustrações e tabelas
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+% ---
+% Sumário (NBR 6027)
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+\chapter{Introdução}
+Esta é a introdução do trabalho. Aqui você apresenta o tema, delimitação, problema e objetivos.
+
+Exemplo de citação indireta conforme NBR 10520: O uso de \LaTeX\ facilita a vida acadêmica \cite{nbr14724}.
+
+Exemplo de citação direta curta (até 3 linhas): ``As citações diretas, no texto, de até três linhas, devem estar contidas entre aspas duplas'' \cite[p. 2]{nbr10520}.
+
+% ----------------------------------------------------------
+% Desenvolvimento
+% ----------------------------------------------------------
+\chapter{Desenvolvimento}
+Aqui começa a parte principal do trabalho (Revisão Bibliográfica, Metodologia, etc).
+
+\section{Seção Secundária (NBR 6024)}
+A numeração das seções é feita automaticamente.
+
+\subsection{Exemplo de Tabela (Norma IBGE)}
+Conforme as normas do IBGE (arquivo \texttt{liv23907.pdf}), tabelas não devem ter traços verticais que as fechem lateralmente. Use o pacote \texttt{booktabs}:
+
+\begin{table}[htb]
+\centering
+\caption{Exemplo de Tabela estilo IBGE}
+\label{tab:ibge_exemplo}
+\begin{tabular}{llr} % l=left, r=right
+    \toprule
+    \textbf{Item} & \textbf{Descrição} & \textbf{Quantidade} \\
+    \midrule
+    Papel & A4 Branco & 500 \\
+    Caneta & Azul Esferográfica & 50 \\
+    Lápis & Preto HB & 100 \\
+    \bottomrule
+\end{tabular}
+\fonte{Elaborado pelo autor (2024).}
+\end{table}
+
+\section{Citações e Referências}
+Para citar, use o comando \texttt{\textbackslash cite\{chave\}}.
+Para citar autor no texto, use \texttt{\textbackslash citeonline\{chave\}}.
+Exemplo: Segundo \citeonline{nbr6023}, as referências devem ser alinhadas à esquerda.
+
+% ----------------------------------------------------------
+% Conclusão
+% ----------------------------------------------------------
+\chapter{Conclusão}
+Parte final do texto, onde se apresentam as conclusões correspondentes aos objetivos e hipóteses.
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+% ----------------------------------------------------------
+% Referências Bibliográficas (NBR 6023)
+% ----------------------------------------------------------
+\bibliography{ref} % Chama o arquivo ref.bib
+
+% ----------------------------------------------------------
+% Apêndices (Opcional)
+% ----------------------------------------------------------
+\begin{apendicesenv}
+\partapendices
+\chapter{Primeiro Apêndice}
+Texto do apêndice (elaborado pelo autor).
+\end{apendicesenv}
+
+% ----------------------------------------------------------
+% Anexos (Opcional)
+% ----------------------------------------------------------
+\begin{anexosenv}
+\partanexos
+\chapter{Primeiro Anexo}
+Texto do anexo (documento não elaborado pelo autor).
+\end{anexosenv}
+
+\end{document}
