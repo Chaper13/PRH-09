@@ -1,0 +1,739 @@
+% !TeX root = main.tex
+\chapter{Fundamentos da Propagação de Ondas}
+
+\setcounter{section}{1}
+\section{Equação da Onda Tridimensional em Coordenadas Cartesianas}
+
+O objetivo desta seção é estabelecer as equações fundamentais que governam a propagação de ondas em meios elásticos tridimensionais, 
+preparando o terreno para a formulação das equações de onda associadas aos diferentes modos físicos de propagação.
+
+A seguir, as conhecidas equações fundamentais da elastodinâmica são resumidas.
+Isso permite que a nomenclatura seja definida.
+Apenas os aspectos que são usados diretamente nos Capítulos 6 e 7 são discutidos.
+Nesta seção, assume-se primeiramente um meio elástico homogêneo isotrópico.
+O amortecimento histerético é introduzido em uma etapa posterior.
+
+\subsection{Equação de Movimento em Deformação Volumétrica e em Deformações de Rotação}
+
+Para uma excitação harmônica com frequência angular $\omega$, assumimos que o campo de deslocamentos varia senoidalmente no tempo. 
+O componente de deslocamento na direção $x$, por exemplo, pode ser expresso na forma complexa como:
+
+\begin{equation}
+    u(t) = U e^{i \omega t} \label{eq:deslocamento_complexo}
+\end{equation}
+
+Onde:
+
+\begin{itemize}
+    \item $u(t)$ é o deslocamento instantâneo no tempo $t$;
+    \item $U$ é a amplitude do deslocamento (independente do tempo);
+    \item $\omega$ é a frequência angular da excitação.
+\end{itemize}
+
+A representação complexa é utilizada por conveniência matemática, sendo o deslocamento físico obtido a partir da parte real da expressão.
+
+Para encontrar o termo de inércia utilizado nas equações de equilíbrio dinâmico, derivamos o deslocamento em relação ao tempo duas vezes:
+
+1. Velocidade:
+$$\dot{u} = \frac{d}{dt}(U e^{i \omega t}) = i \omega U e^{i \omega t} = i \omega u$$
+
+2. Aceleração:
+$$\ddot{u} = \frac{d}{dt}(i \omega U e^{i \omega t}) = (i \omega)^2 U e^{i \omega t} = -\omega^2 U e^{i \omega t}$$
+
+Como $u = U e^{i \omega t}$, temos a relação fundamental para movimento harmônico:
+\begin{equation}
+    \ddot{u} = -\omega^2 u \label{eq:relacao_aceleracao}
+\end{equation}
+
+\subsubsection*{Aplicação nas Equações de Equilíbrio}
+
+Com a hipótese de excitação harmônica, a dependência temporal é eliminada,
+e o problema passa a ser formulado em termos das amplitudes espaciais dos campos de deslocamento e tensão.
+
+Ao substituir o termo de inércia da segunda lei de Newton ($F = m \cdot a \rightarrow \rho \ddot{u}$) pela relação encontrada na \eqref{eq:relacao_aceleracao},
+as equações de equilíbrio dinâmico tridimensional para um meio com densidade de massa $\rho$ tornam-se:
+
+\begin{subequations}
+    \label{eq:equilibrio_dinamico}
+    \begin{align}
+        \sigma_{x,x} + \tau_{xy,y} + \tau_{xz,z} &= -\rho \omega^2 u \label{eq:eq_x} \\
+        \tau_{yx,x} + \sigma_{y,y} + \tau_{yz,z} &= -\rho \omega^2 v \label{eq:eq_y} \\
+        \tau_{zx,x} + \tau_{zy,y} + \sigma_{z,z} &= -\rho \omega^2 w \label{eq:eq_z}
+    \end{align} 
+\end{subequations}
+
+A notação de subscrito após uma vírgula é utilizada para denotar uma derivada parcial. 
+Dessa forma, o termo $\sigma_{x,x}$ representa a derivada da tensão normal em relação à coordenada $x$ ($\partial \sigma_x / \partial x$), 
+enquanto $\tau_{xy,y}$ representa a derivada da tensão de cisalhamento em relação a $y$ ($\partial \tau_{xy} / \partial y$). 
+As amplitudes de todas as tensões e deslocamentos são funções das coordenadas espaciais $x, y$ e $z$.
+
+No regime de pequenas deformações, as relações cinemáticas entre deslocamentos e deformações específicas são dadas por:
+
+\begin{subequations}
+    \label{eq:deformacao_deslocamento}
+    \begin{align}
+        \epsilon_x &= u_{,x} \\
+        \epsilon_y &= v_{,y} \\
+        \epsilon_z &= w_{,z} \\
+        \gamma_{xy} &= u_{,y} + v_{,x} \\
+        \gamma_{xz} &= u_{,z} + w_{,x} \\
+        \gamma_{yz} &= v_{,z} + w_{,y}
+    \end{align}
+\end{subequations}
+
+As amplitudes das componentes das deformações normais e de cisalhamento são denotadas por $\epsilon$ e $\gamma$, respectivamente. 
+A seguir, apresenta-se a Lei de Hooke na forma invertida, com as deformações expressas em função das tensões.
+
+\begin{subequations}
+    \label{eq:lei_hooke}
+    \begin{align}
+        \epsilon_x &= \frac{1}{E} \left(\sigma_x - \nu \sigma_y - \nu \sigma_z\right) \\
+        \epsilon_y &= \frac{1}{E} \left(\sigma_y - \nu \sigma_x - \nu \sigma_z\right) \\
+        \epsilon_z &= \frac{1}{E} \left(\sigma_z - \nu \sigma_x - \nu \sigma_y\right) \\
+        \gamma_{xy} &= \frac{\tau_{xy}}{G} \\
+        \gamma_{xz} &= \frac{\tau_{xz}}{G} \\
+        \gamma_{yz} &= \frac{\tau_{yz}}{G}
+    \end{align}
+\end{subequations}
+
+Onde o módulo de cisalhamento $G$ é relacionado ao módulo de elasticidade $E$ e ao coeficiente de Poisson $\nu$ por:
+
+\begin{equation}
+    \label{eq:G}
+    G = \frac{E}{2(1 + \nu)}
+\end{equation}
+
+Para a consideração de condições de contorno em elementos infinitesimais, 
+define-se o vetor de tração superficial com amplitudes de componente $t_x, t_y, t_z$.
+Essas expressões serão fundamentais na imposição de condições de contorno em superfícies livres ou interfaces solo–estrutura.
+
+
+\begin{subequations}
+    \label{eq:tracao_superficial}
+    \begin{align}
+        t_x &= n_x \sigma_x + n_y \tau_{xy} + n_z \tau_{xz} \\
+        t_y &= n_x \tau_{yx} + n_y \sigma_y + n_z \tau_{yz} \\
+        t_z &= n_x \tau_{zx} + n_y \tau_{zy} + n_z \sigma_z
+    \end{align}
+\end{subequations}
+
+Embora completas, as equações apresentadas formam um sistema fortemente acoplado de 15 componentes (tensões, deformações e deslocamentos),
+cuja solução direta é pouco transparente do ponto de vista físico.
+Para revelar os mecanismos fundamentais de propagação de ondas, introduz-se uma mudança de variáveis cinemáticas.
+
+\begin{equation}
+    \label{eq:def_e}
+    e = u_{,x} + v_{,y} + w_{,z}
+\end{equation}
+
+\begin{subequations}
+    \label{eq:def_omega}
+    \begin{align}
+        \Omega_x &= \frac{1}{2}(w_{,y} - v_{,z}) \\
+        \Omega_y &= \frac{1}{2}(u_{,z} - w_{,x}) \\
+        \Omega_z &= \frac{1}{2}(v_{,x} - u_{,y})
+    \end{align}
+\end{subequations}
+
+Note que essas variáveis não introduzem novas hipóteses físicas, tratando-se apenas de uma mudança de descrição do campo de deslocamentos.
+
+Fisicamente, a variável $e$ descreve mudanças de volume sem mudança de forma (associada às ondas primárias P),
+enquanto as componentes de $\Omega$ descrevem rotações de corpo rígido de um elemento infinitesimal sem mudança de volume (associadas às ondas secundárias S). 
+
+Como a rotação representa movimento de corpo rígido local, sem criação ou destruição de volume, o campo rotacional satisfaz naturalmente uma condição de divergência nula.
+
+\begin{equation}
+    \label{eq:continuidade_omega}
+    \Omega_{x,x} + \Omega_{y,y} + \Omega_{z,z} = 0
+\end{equation}
+
+Essa decomposição permite a obtenção de equações de onda desacopladas, que serão exploradas nas seções seguintes.
+
+Utilizando as novas variáveis cinemáticas, as três equações de movimento originais podem ser reescritas em função da deformação volumétrica $e$ e das rotações $\Omega$.
+Substituindo as relações tensão-deformação e deformação-deslocamento nas equações de equilíbrio, obtém-se:
+
+\begin{subequations}
+    \label{eq:movimento_desacoplado}
+    \begin{align}
+        (\lambda + 2G)e_{,x} + 2G(\Omega_{y,z} - \Omega_{z,y}) &= -\rho \omega^2 u \\
+        (\lambda + 2G)e_{,y} + 2G(\Omega_{z,x} - \Omega_{x,z}) &= -\rho \omega^2 v \\
+        (\lambda + 2G)e_{,z} + 2G(\Omega_{x,y} - \Omega_{y,x}) &= -\rho \omega^2 w
+    \end{align}
+\end{subequations}
+
+Onde a constante de Lamé $\lambda$ é expressa em função do módulo de elasticidade $E$ e do coeficiente de Poisson $\nu$ como:
+
+\begin{equation}
+    \lambda = \frac{\nu E}{(1+\nu)(1-2\nu)} \label{eq:lame}
+\end{equation}
+
+Para desacoplar essas equações e revelar os tipos de onda, realizam-se operações diferenciais específicas. 
+
+Primeiramente, para isolar a deformação volumétrica, derivam-se as três equações acima em relação a $x, y$ e $z$, respectivamente, e somam-se os resultados.
+Isso elimina os termos rotacionais, resultando na equação da onda dilatacional:
+
+\begin{equation}
+    (\lambda + 2G)(e_{,xx} + e_{,yy} + e_{,zz}) = -\rho \omega^2 e \label{eq:onda_p_geral}
+\end{equation}
+
+Utilizando o operador Laplaciano ($\nabla^2$), esta equação é reescrita de forma compacta:
+
+\begin{equation}
+    \nabla^2 e = - \frac{\omega^2}{c_p^2} e \label{eq:helmholtz_e}
+\end{equation}
+
+Aqui surge naturalmente a definição da velocidade da onda dilatacional (ou onda P), $c_p$, que depende exclusivamente das propriedades do material:
+
+\begin{equation}
+    \label{eq:cp}
+    c_p^2 = \frac{\lambda + 2G}{\rho}
+\end{equation}
+
+De forma análoga, para isolar as rotações,
+elimina-se a deformação volumétrica das equações de movimento (tomando o rotacional do campo ou subtraindo as derivadas cruzadas).
+Isso leva às equações governantes para as componentes de rotação:
+
+\begin{subequations}
+    \label{eq:onda_s_componentes}
+    \begin{align}
+        G(\Omega_{x,xx} + \Omega_{x,yy} + \Omega_{x,zz}) &= -\rho \omega^2 \Omega_x \\
+        G(\Omega_{y,xx} + \Omega_{y,yy} + \Omega_{y,zz}) &= -\rho \omega^2 \Omega_y \\
+        G(\Omega_{z,xx} + \Omega_{z,yy} + \Omega_{z,zz}) &= -\rho \omega^2 \Omega_z
+    \end{align}
+\end{subequations}
+
+Introduzindo $c_s$, identificada como a velocidade da onda de cisalhamento (ou onda S):
+
+\begin{equation}
+    \label{eq:cs}
+    c_s^2 = \frac{G}{\rho}
+\end{equation}
+
+Pode-se escrever a equação vetorial para o campo de rotações $\{\Omega\}$:
+
+\begin{equation}
+    \nabla^2 \{\Omega\} = - \frac{\omega^2}{c_s^2} \{\Omega\} \label{eq:helmholtz_omega}
+\end{equation}
+
+As equações obtidas são equações diferenciais parciais lineares de segunda ordem. A primeira governa a propagação de ondas associadas a mudanças de volume (Ondas P),
+propagando-se com velocidade $c_p$. A segunda governa a propagação de ondas associadas à distorção sem mudança de volume (Ondas S), propagando-se com velocidade $c_s$.
+
+\subsection{Onda P (P-Wave)}
+
+Agora que isolamos a equação para a deformação volumétrica $e$ \eqref{eq:helmholtz_e}, podemos resolvê-la. Esta é uma equação de onda escalar clássica.
+
+Para encontrar a solução, assumimos uma \textbf{onda plana} se propagando no espaço. Matematicamente, representamos isso por uma função exponencial complexa.
+A escolha dessa função não é arbitrária; ela representa uma perturbação que varia senoidalmente tanto no tempo quanto no espaço.
+
+A solução tentativa para a amplitude da deformação volumétrica é:
+
+\begin{equation}
+    e = -\frac{i\omega}{c_p} A_p \exp\left[\frac{i\omega}{c_p}(-l_x x - l_y y - l_z z)\right] \label{eq:solucao_onda_p}
+\end{equation}
+
+Vamos "traduzir" os termos desta expressão:
+\begin{itemize}
+    \item \textbf{$A_p$}: É a amplitude da onda (o "tamanho" máximo da deformação).
+    \item \textbf{$l_x, l_y, l_z$}: São os \textit{cossenos diretores}. Eles funcionam como coordenadas de um vetor unitário que aponta para onde a onda está indo.
+    Para garantir que seja um vetor unitário (comprimento 1), deve-se satisfazer:
+    \begin{equation}
+        l_x^2 + l_y^2 + l_z^2 = 1 \label{eq:vetor_unitario_p}
+    \end{equation}
+    \item \textbf{O termo exponencial}: Representa a fase da onda. A expressão $(-l_x x - l_y y - l_z z)$ define frentes de onda planas perpendiculares à direção de propagação.
+\end{itemize}
+
+O termo $s = l_x x + l_y y + l_z z$ pode ser interpretado como a distância percorrida ao longo da linha de propagação.
+Assim, para um tempo fixo, a deformação é constante em qualquer plano perpendicular a essa direção $s$.
+
+\subsection*{Cálculo dos Deslocamentos}
+Uma vez definida a deformação volumétrica $e$, podemos recuperar os deslocamentos físicos $u, v, w$. O resultado matemático revela a natureza física da Onda P:
+
+\begin{subequations}
+\label{eq:deslocamentos_p}
+\begin{align}
+    u_p &= l_x A_p \exp\left[\frac{i\omega}{c_p}(-l_x x - l_y y - l_z z)\right] \\
+    v_p &= l_y A_p \exp\left[\frac{i\omega}{c_p}(-l_x x - l_y y - l_z z)\right] \\
+    w_p &= l_z A_p \exp\left[\frac{i\omega}{c_p}(-l_x x - l_y y - l_z z)\right]
+\end{align}
+\end{subequations}
+
+\textbf{Interpretação Física Importante:}
+Observe que o deslocamento em cada direção ($u, v, w$) é proporcional ao respectivo cosseno diretor ($l_x, l_y, l_z$) que define a direção da onda.
+Isso significa que o \textbf{vetor deslocamento resultante é paralelo à direção de propagação}.
+
+É por isso que a Onda P é chamada de onda dilatacional ou longitudinal:
+o movimento da partícula ocorre "para frente e para trás" ao longo da mesma linha em que a onda viaja, comprimindo e expandindo o material (daí o termo "dilatacional"),
+sem causar rotação ou distorção de forma.
+
+\subsection{Onda S (S-Wave)}
+
+Enquanto a Onda P está associada à mudança de volume, a Onda S (Onda Secundária ou de Cisalhamento) está associada à distorção.
+A equação que governa este fenômeno \eqref{eq:helmholtz_omega} é vetorial, o que torna a solução um pouco mais rica:
+o movimento da partícula pode ocorrer em qualquer direção, desde que seja perpendicular à propagação.
+
+Para resolver a equação $\nabla^2 \{\Omega\} = - \frac{\omega^2}{c_s^2} \{\Omega\}$, propomos uma solução análoga à da Onda P, mas agora para o vetor de rotação:
+
+\begin{equation}
+    \{\Omega\} = -\frac{i\omega}{2c_s} \{C\} \exp\left[\frac{i\omega}{c_s}(-m_x x - m_y y - m_z z)\right] \label{eq:solucao_onda_s}
+\end{equation}
+
+Onde:
+\begin{itemize}
+    \item $c_s$ é a velocidade da onda de cisalhamento.
+    \item $m_x, m_y, m_z$ são os cossenos diretores da propagação da Onda S (análogos aos $l_i$ da Onda P).
+    \item $\{C\}$ é um vetor de amplitude constante.
+\end{itemize}
+
+Existe uma restrição física importante: como o campo é rotacional (divergência nula), o vetor de amplitude $\{C\}$ deve ser perpendicular à direção de propagação.
+Matematicamente:
+\begin{equation}
+    m_x C_x + m_y C_y + m_z C_z = 0 \label{eq:condicao_ortogonalidade}
+\end{equation}
+
+Calculando os deslocamentos resultantes ($u_s, v_s, w_s$) a partir das rotações, percebe-se que o movimento da partícula ocorre num plano \textbf{perpendicular} à direção de propagação.
+É por isso que a Onda S é chamada de \textit{onda transversal}.
+
+\subsection*{Decomposição em Ondas SH e SV}
+Como o movimento da partícula é perpendicular à propagação, ele pode "apontar" para várias direções.
+Para facilitar a análise em engenharia civil (especialmente em solos estratificados horizontalmente), decompomos a Onda S em duas componentes ortogonais:
+
+\begin{enumerate}
+    \item \textbf{Onda SH (Horizontal):} A componente do movimento que ocorre estritamente no plano horizontal ($x-y$).
+    Esta onda não causa deslocamento vertical ($w_s = 0$). É fundamental em terremotos pois "sacode" as estruturas lateralmente.
+    
+    \item \textbf{Onda SV (Vertical):} A componente do movimento que reside no plano vertical definido pela direção de propagação e o eixo $z$.
+    Note que, apesar do nome, ela não é puramente vertical; ela tem componentes verticais e horizontais, mas "vive" num plano vertical.
+\end{enumerate}
+
+Se definirmos as amplitudes dessas componentes como $A_{SH}$ e $A_{SV}$, os deslocamentos físicos podem ser escritos de forma mais intuitiva:
+
+\begin{subequations}
+\label{eq:deslocamentos_sh_sv}
+\begin{align}
+    u_s &= \frac{m_x m_z A_{SV} - m_y A_{SH}}{\sqrt{m_x^2 + m_y^2}} E_s \\
+    v_s &= \frac{m_y m_z A_{SV} + m_x A_{SH}}{\sqrt{m_x^2 + m_y^2}} E_s \\
+    w_s &= -\sqrt{m_x^2 + m_y^2} A_{SV} E_s
+\end{align}
+\end{subequations}
+
+Onde o termo exponencial de fase foi abreviado para:
+
+$$E_s = \exp\left[\frac{i\omega}{c_s}(-m_x x - m_y y - m_z z)\right]$$
+
+\textbf{Interpretação:}
+\begin{itemize}
+    \item Observe a equação de $w_s$: ela depende apenas de $A_{SV}$. Isso confirma que a onda SH ($A_{SH}$) não gera movimento vertical.
+    \item Para uma onda incidindo verticalmente (vindo diretamente de baixo para cima, onde $m_x=0, m_y=0$), essa distinção geométrica perde o sentido clássico,
+    e tratamos apenas como componentes horizontais $u$ e $v$.
+\end{itemize}
+
+\subsection{Amortecimento Material}
+
+Até agora, assumimos um meio perfeitamente elástico, onde a energia da onda se conserva indefinidamente.
+No entanto, solos reais dissipam energia devido ao atrito intergranular e outros mecanismos internos. Esse fenômeno é chamado de amortecimento material ou histerético.
+
+Para incluir esse efeito nas equações sem ter que reescrever toda a teoria, utilizamos o \textbf{Princípio da Correspondência}.
+A ideia é simples: substituímos as constantes elásticas reais por \textit{constantes complexas}.
+A parte real continua representando a rigidez (armazenamento de energia), enquanto a parte imaginária representa a dissipação.
+
+Definimos os módulos complexos (denotados por um asterisco) da seguinte forma:
+
+\begin{subequations}
+\label{eq:modulos_complexos}
+\begin{align}
+    \lambda^* + 2G^* &= (\lambda + 2G)(1 + 2i\zeta_p) \\
+    G^* &= G(1 + 2i\zeta_s)
+\end{align}
+\end{subequations}
+
+Onde:
+\begin{itemize}
+    \item $\zeta_p$ é a razão de amortecimento histerético para Ondas P.
+    \item $\zeta_s$ é a razão de amortecimento histerético para Ondas S.
+\end{itemize}
+
+Como as velocidades de onda dependem desses módulos (\eqref{eq:cp} e \eqref{eq:cs}), elas também se tornam complexas:
+
+\begin{subequations}
+\label{eq:velocidades_complexas}
+\begin{align}
+    c_p^* &= c_p \sqrt{1 + 2i\zeta_p} \\
+    c_s^* &= c_s \sqrt{1 + 2i\zeta_s}
+\end{align}
+\end{subequations}
+
+Essa abordagem matemática é poderosa: todas as equações que deduzimos anteriormente para o caso elástico continuam válidas para o caso amortecido,
+bastando substituir $c_p$ e $c_s$ por $c_p^*$ e $c_s^*$.
+
+\subsection{Movimento Total (Combinação de Ondas)}
+
+Na prática da engenharia geotécnica, é comum assumir que as ondas se propagam num plano vertical específico (por exemplo, o plano $x-z$).
+Isso simplifica a análise, pois podemos fixar a direção horizontal ($y$) sem perder generalidade.
+
+Se assumirmos que a propagação ocorre no plano $x-z$, os cossenos diretores na direção $y$ tornam-se nulos ($l_y = m_y = 0$).
+Somando as contribuições das Ondas P, SV e SH, e incorporando o amortecimento (usando as velocidades complexas),
+chegamos às expressões finais para o movimento total em um ponto:
+
+\begin{subequations}
+\label{eq:movimento_total}
+\begin{align}
+    u &= \underbrace{l_x A_p E_p}_{\text{Onda P}} + \underbrace{m_z A_{SV} E_s}_{\text{Onda SV}} \\
+    v &= \underbrace{A_{SH} E_s}_{\text{Onda SH}} \\
+    w &= \underbrace{l_z A_p E_p}_{\text{Onda P}} - \underbrace{m_x A_{SV} E_s}_{\text{Onda SV}}
+\end{align}
+\end{subequations}
+
+Onde os termos de fase complexa são:
+\begin{align*}
+    E_p &= \exp\left[i\omega\left(-\frac{l_x x}{c_p^*} - \frac{l_z z}{c_p^*}\right)\right] \\
+    E_s &= \exp\left[i\omega\left(-\frac{m_x x}{c_s^*} - \frac{m_z z}{c_s^*}\right)\right]
+\end{align*}
+
+\textbf{Conclusão Fundamental da Seção 5.2:}
+As equações \eqref{eq:movimento_total} revelam um desacoplamento físico crucial para problemas planos ($x-z$):
+\begin{itemize}
+    \item O deslocamento fora do plano ($v$) depende \textbf{exclusivamente} da Onda SH. Isso permite analisar o movimento antiplano (out-of-plane) separadamente.
+    \item Os deslocamentos no plano ($u$ e $w$) dependem de uma combinação acoplada de Ondas P e SV. Isso forma o problema do movimento no plano (in-plane).
+\end{itemize}
+
+Essa separação entre o problema \textit{antiplano} (SH) e o problema \textit{no plano} (P-SV) será a base para a construção das matrizes de rigidez dinâmica nas próximas seções.
+
+\section{Matriz de Rigidez Dinâmica para Movimento Fora do Plano}
+
+Nesta seção, aplicamos a teoria de ondas desenvolvida anteriormente para modelar uma camada de solo horizontal.
+O objetivo é tratar essa camada como um elemento estrutural,
+derivando uma matriz de rigidez que relacione as forças aplicadas nas interfaces (topo e base) com os deslocamentos resultantes.
+
+Começamos pelo movimento fora do plano (associado às Ondas SH), pois é matematicamente mais simples:
+envolve apenas o deslocamento transversal $v$ e não acopla com as outras direções.
+
+\subsection{Tipos de Ondas}
+
+Considere uma camada de solo homogênea com profundidade $d$. Diferente de um meio infinito, aqui as ondas batem nas interfaces e refletem.
+Portanto, a solução geral para o deslocamento $v(z,x)$ deve ser a soma de duas ondas:
+\begin{itemize}
+    \item Uma onda incidente (descendo, amplitude $A_{SH}$);
+    \item Uma onda refletida (subindo, amplitude $B_{SH}$).
+\end{itemize}
+
+A equação do movimento, adaptada para incluir a reflexão, torna-se:
+
+\begin{equation}
+    v(z,x) = \underbrace{\left[ A_{SH} \exp(iktz) + B_{SH} \exp(-iktz) \right]}_{\text{Variação com a profundidade } z} \exp(-ikx) \label{eq:campo_deslocamento_sh}
+\end{equation}
+
+Para simplificar a notação, introduzimos as variáveis auxiliares fundamentais para a formulação matricial:
+\begin{itemize}
+    \item $k = \omega/c$: número de onda (frequência espacial horizontal);
+    \item $c = c_s^*/m_x$: velocidade de fase aparente na direção horizontal;
+    \item $t = \sqrt{(c/c_s^*)^2 - 1}$: um escalar que relaciona a propagação vertical com a horizontal (ligado ao ângulo de incidência).
+\end{itemize}
+
+\subsection{Matrizes de Transferência e de Rigidez Dinâmica de Camada e de Semiespaço}
+
+Para a engenharia, não estamos interessados nas amplitudes de onda $A_{SH}$ e $B_{SH}$ (que são conceitos abstratos),
+mas sim nos deslocamentos $v$ e tensões $\tau_{yz}$ nas fronteiras da camada.
+
+\subsubsection*{Matriz da Camada (Layer)}
+
+\begin{enumerate}
+    \item \textbf{Cálculo das Tensões:} Usando a Lei de Hooke ($\tau_{yz} = G^* v_{,z}$), derivamos a Eq. \eqref{eq:campo_deslocamento_sh} em relação a $z$:
+    \begin{equation}
+        \tau_{yz}(z) = iktG^* \left[ A_{SH} \exp(iktz) - B_{SH} \exp(-iktz) \right] \label{eq:tensao_sh}
+    \end{equation}
+    
+    \item \textbf{Eliminação das Amplitudes:} Aplicamos as equações no topo ($z=0$) e na base ($z=d$). Isolando $A_{SH}$ e $B_{SH}$,
+    reorganizamos o sistema para que os deslocamentos ($v_1, v_2$) sejam as variáveis independentes e as forças nodais ($Q_1, Q_2$) sejam as dependentes.
+    
+    \textit{Nota: As forças externas $Q$ equilibram as tensões internas, logo definimos $Q_1 = -\tau_{yz1}$ (topo) e $Q_2 = +\tau_{yz2}$ (base).}
+\end{enumerate}
+
+O resultado final é a \textbf{Matriz de Rigidez Dinâmica da Camada} $[S_{SH}^L]$:
+
+\begin{equation}
+    \begin{Bmatrix} Q_1 \\ Q_2 \end{Bmatrix} = 
+    \frac{ktG^*}{\sin(ktd)} 
+    \begin{bmatrix} 
+        \cos(ktd) & -1 \\ 
+        -1 & \cos(ktd) 
+    \end{bmatrix} 
+    \begin{Bmatrix} v_1 \\ v_2 \end{Bmatrix} \label{eq:matriz_rigidez_sh_layer}
+\end{equation}
+
+Esta matriz $2 \times 2$ funciona exatamente como a matriz de rigidez de uma barra em análise estrutural clássica,
+mas seus termos dependem da frequência $\omega$ (através de $k$ e $t$).
+
+\subsubsection*{Matriz do Semiespaço (Half-Space)}
+
+Frequentemente, a última camada do solo se estende infinitamente para baixo (rocha basal ou bedrock). Este é o "Semiespaço".
+A diferença física crucial é a \textbf{Condição de Radiação}: ondas podem descer para o infinito, mas nenhuma onda retorna de lá.
+
+Isso implica que não existe onda refletida, logo $B_{SH} = 0$.
+Substituindo isso nas equações de topo ($z=0$) e eliminando $A_{SH}$, obtemos uma relação direta e simples entre a força e o deslocamento na superfície:
+
+\begin{equation}
+    Q_0 = \underbrace{(iktG^*)}_{S_{SH}^R} v_0 \label{eq:rigidez_sh_halfspace}
+\end{equation}
+
+O coeficiente de rigidez do semiespaço é:
+\begin{equation}
+    S_{SH}^R = iktG^* \label{eq:coef_rigidez_sh_r}
+\end{equation}
+
+\textbf{Interpretação Física:}
+Para um meio elástico (sem amortecimento material), $S_{SH}^R$ é puramente imaginário (devido ao termo $i$).
+Em dinâmica estrutural, uma rigidez imaginária ($i\omega C$) representa um \textbf{amortecedor (dashpot)}.
+Isso significa que o semiespaço age como um "sumidouro de energia", dissipando a energia vibratória para o infinito através da radiação geométrica.
+
+\subsection{Casos Especiais}
+
+As expressões gerais derivadas anteriormente (Eqs. \ref{eq:matriz_rigidez_sh_layer} e \ref{eq:coef_rigidez_sh_r}) podem apresentar indefinições matemáticas ou simplificações importantes em certas situações limite.
+Estes casos são essenciais para verificação numérica e compreensão física.
+
+\begin{description}
+    \item[1. Incidência Vertical ($\omega > 0, k=0$):]
+    Este é o caso mais importante para a engenharia sísmica prática.
+    Quando $k=0$, o comprimento de onda horizontal é infinito,
+    o que implica que a onda atinge toda a superfície horizontal simultaneamente (propagação puramente vertical).
+    
+    Neste limite, $kt$ converge para $\omega/c_s^*$. A matriz de rigidez da camada torna-se:
+    \begin{equation}
+        [S_{SH}^L] = \frac{G^*}{c_s^* \sin(\frac{\omega d}{c_s^*})} \cdot \omega
+        \begin{bmatrix} 
+            \cos(\frac{\omega d}{c_s^*}) & -1 \\ 
+            -1 & \cos(\frac{\omega d}{c_s^*}) 
+        \end{bmatrix}
+    \end{equation}
+    
+    Para o semiespaço, a rigidez torna-se:
+    \begin{equation}
+        S_{SH}^R = i G^* \frac{\omega}{c_s^*} = i \omega (\rho c_s^*)
+    \end{equation}
+    \textbf{Interpretação:} O termo $\rho c_s^*$ é a impedância específica do meio.
+    Como o resultado é puramente imaginário e proporcional à frequência ($i\omega C$),
+    o semiespaço comporta-se como um \textbf{amortecedor viscoso puro}. Este é o fundamento dos modelos de fronteira absorvente (como o \textit{Dashpot de Lysmer}).
+
+    \item[2. Caso Estático ($\omega = 0, k \neq 0$):]
+    Representa a resposta do solo a cargas estáticas que variam espacialmente (harmonicamente ao longo de $x$).
+    Neste caso, os termos trigonométricos tornam-se hiperbólicos:
+    \begin{equation}
+        [S_{SH}^L] = \frac{k G^*}{\sinh(kd)} 
+        \begin{bmatrix} 
+            \cosh(kd) & -1 \\ 
+            -1 & \cosh(kd) 
+        \end{bmatrix}
+    \end{equation}
+    Para o semiespaço, $S_{SH}^R = k G^*$. Note que a rigidez agora é real (mola),
+    pois sem frequência ($\omega=0$) não há radiação de energia nem amortecimento histerético (se $G^*$ for real).
+
+    \item[3. Alta Frequência ou Ondas Curtas ($k \to \infty$):]
+    Quando o número de onda é muito alto (comprimento de onda muito curto em relação à espessura da camada), a interação entre o topo e a base desaparece.
+    O termo fora da diagonal na matriz de rigidez tende a zero,
+    significando que o topo da camada "não enxerga" a base e se comporta como se estivesse sobre um semiespaço.
+\end{description}
+
+\subsection{Camada Carregada (Loaded Layer)}
+
+Até o momento, consideramos que as forças externas atuam apenas nas interfaces (nós) da camada.
+No entanto, em problemas reais (como o peso próprio do solo ou interação estaca-solo),
+podem existir cargas distribuídas $q(z)$ atuando ao longo da profundidade da camada.
+
+A estratégia de solução é análoga ao Método dos Deslocamentos na análise de estruturas convencional:
+\begin{enumerate}
+    \item \textbf{Estado Bloqueado (Solução Particular):} Consideramos as interfaces fixa (deslocamentos nulos) e calculamos as reações de engastamento perfeito geradas pela carga distribuída.
+    \item \textbf{Estado Livre (Solução Homogênea):} Aplicamos o inverso dessas reações no sistema total para liberar as interfaces.
+\end{enumerate}
+
+Considerando uma variação linear da carga ao longo da profundidade (indo de $q_1$ no topo a $q_2$ na base),
+a equação de equilíbrio dinâmico ganha um termo de força extra:
+
+\begin{equation}
+    \tau_{yx,x} + \tau_{yz,z} = -\rho\omega^2 v - q(z) \label{eq:equilibrio_com_carga}
+\end{equation}
+
+A solução final é a soma da solução particular $v^p$ (devida à carga) com a solução homogênea $v^h$ (devida aos deslocamentos de contorno).
+As forças nodais equivalentes ($Q_1, Q_2$) a serem aplicadas na matriz de rigidez global são as reações de engastamento com sinal trocado:
+
+\begin{equation}
+    Q_{total} = -Q^p - Q^h \label{eq:superposicao_cargas}
+\end{equation}
+
+Onde $Q^p$ são as reações calculadas fixando-se as bordas (Eq. 5.117 do livro).
+
+\subsection{Taxa de Transmissão de Energia}
+
+Para entender como a energia se dissipa ou se propaga através do solo, calculamos a taxa de transmissão de energia horizontal $N$ através de uma seção vertical da camada.
+
+Fisicamente, a potência (taxa de energia) é o produto da Força pela Velocidade.
+No nosso caso, integramos o trabalho realizado pela tensão de cisalhamento horizontal $\tau_{yx}$ ao longo da profundidade $d$,
+tirando a média em um período de vibração $T = 2\pi/\omega$:
+
+\begin{equation}
+    N = -\frac{\omega}{2\pi} \int_{0}^{d} \int_{0}^{2\pi/\omega} \text{Re}[\tau_{yx}(z) e^{i\omega t}] \text{Re}[\dot{v}(z) e^{i\omega t}] \, dt \, dz \label{eq:definicao_energia}
+\end{equation}
+
+Resolvendo a integral temporal e substituindo as expressões das ondas, chegamos a uma fórmula compacta para o fluxo de energia:
+
+\begin{equation}
+    N = \frac{\omega}{2} \text{Re}(kG^*) \int_{0}^{d} |v(z)|^2 dz \label{eq:energia_final_sh}
+\end{equation}
+
+\textbf{Interpretação:}
+Esta equação mostra que a energia transmitida horizontalmente depende diretamente da parte real de $kG^*$.
+Isso confirma que o amortecimento e a rigidez do material controlam quão longe a vibração consegue viajar lateralmente a partir da fonte.
+
+\section{Matriz de Rigidez Dinâmica para Movimento no Plano}
+
+Diferente do movimento fora do plano (onde apenas a onda SH existia de forma isolada),
+o movimento no plano envolve a interação simultânea de Ondas P (Dilatacionais) e Ondas SV (Cisalhamento Vertical).
+
+Isso ocorre devido ao fenômeno de \textit{conversão de modo}: quando uma Onda P incide numa interface horizontal,
+as condições de contorno não podem ser satisfeitas apenas com uma reflexão P; é necessário gerar também uma onda SV refletida (e vice-versa).
+Portanto, as duas ondas estão fisicamente acopladas e devem ser formuladas em conjunto.
+
+\subsection{Tipos de Ondas}
+
+Para modelar a camada de solo, precisamos considerar quatro componentes de onda viajando simultaneamente:
+\begin{enumerate}
+    \item Onda P descendo (incidente, amplitude $A_P$);
+    \item Onda P subindo (refletida, amplitude $B_P$);
+    \item Onda SV descendo (incidente, amplitude $A_{SV}$);
+    \item Onda SV subindo (refletida, amplitude $B_{SV}$).
+\end{enumerate}
+
+Para que essas ondas coexistam e satisfaçam as condições de contorno em toda a extensão da interface (para qualquer $x$),
+elas devem viajar horizontalmente com a mesma velocidade de fase aparente $c$. Isso impõe a seguinte relação geométrica (Lei de Snell):
+
+\begin{equation}
+    c = \frac{c_p^*}{l_x} = \frac{c_s^*}{m_x} \label{eq:snell_law}
+\end{equation}
+
+Os deslocamentos no plano ($u$ e $w$) são a superposição das contribuições de todas essas ondas.
+Matematicamente, as equações são expandidas para incluir as ondas refletidas, resultando em expressões que dependem de quatro amplitudes desconhecidas.
+
+Para simplificar a notação, definimos os parâmetros auxiliares $s$ e $t$ (associados às tangentes dos ângulos de incidência):
+
+\begin{equation}
+    s = -i\sqrt{1 - \frac{1}{l_x^2}} \quad \text{e} \quad t = -i\sqrt{1 - \frac{1}{m_x^2}}
+\end{equation}
+
+\subsection{Matrizes de Transferência e de Rigidez Dinâmica de Camada e de Semiespaço}
+
+A formulação matricial segue a lógica anterior, mas agora a dimensão do problema dobra.
+O estado em qualquer profundidade $z$ é definido por quatro variáveis: dois deslocamentos ($u, w$) e duas tensões ($\tau_{xz}, \sigma_z$).
+
+\subsubsection*{Matriz da Camada (Layer)}
+
+Relacionando as forças nodais ($P, R$) com os deslocamentos nodais ($u, w$) no topo e na base, obtemos a matriz de rigidez da camada $[S_{P-SV}^L]$.
+
+\textit{Truque de Simetria:} O livro utiliza um artifício matemático importante:
+multiplica-se os deslocamentos verticais $w$ e as forças verticais $R$ pela unidade imaginária $i$.
+Isso torna a matriz de rigidez simétrica, facilitando a implementação numérica.
+
+A relação força-deslocamento para a camada assume a forma $4 \times 4$:
+
+\begin{equation}
+    \begin{Bmatrix} P_1 \\ iR_1 \\ P_2 \\ iR_2 \end{Bmatrix} = 
+    [S_{P-SV}^L]
+    \begin{Bmatrix} u_1 \\ iw_1 \\ u_2 \\ iw_2 \end{Bmatrix} \label{eq:sistema_camada_psv}
+\end{equation}
+
+A matriz completa $[S_{P-SV}^L]$ é apresentada na Tabela 5-3 do livro e envolve termos trigonométricos complexos dependentes de $ksd$ e $ktd$.
+
+\subsubsection*{Matriz do Semiespaço (Half-Space)}
+
+Para o semiespaço (rocha basal), aplicamos novamente a \textbf{Condição de Radiação}: apenas ondas que descem ($A_P, A_{SV}$) são permitidas; as ondas que sobem ($B_P, B_{SV}$) são nulas.
+
+Isso simplifica o sistema para uma matriz $2 \times 2$ que relaciona as forças na superfície ($P_0, R_0$) com os deslocamentos na superfície ($u_0, w_0$).
+O resultado é a matriz de rigidez do semiespaço $[S_{P-SV}^R]$:
+
+\begin{equation}
+    \begin{Bmatrix} P_0 \\ iR_0 \end{Bmatrix} = 
+    kG^* \begin{bmatrix} 
+        S_{xx} & S_{xz} \\ 
+        S_{zx} & S_{zz} 
+    \end{bmatrix} 
+    \begin{Bmatrix} u_0 \\ iw_0 \end{Bmatrix} \label{eq:rigidez_psv_halfspace}
+\end{equation}
+
+Os coeficientes desta matriz representam a rigidez e o amortecimento de radiação acoplados.
+\begin{itemize}
+    \item $S_{xx}$: Rigidez horizontal (resistência ao balanço lateral).
+    \item $S_{zz}$: Rigidez vertical (resistência ao assentamento dinâmico).
+    \item $S_{xz}, S_{zx}$: Termos de acoplamento (uma força horizontal gera um movimento vertical e vice-versa).
+\end{itemize}
+
+\subsection{Casos Especiais}
+
+Alguns casos limite fornecem insights físicos importantes e simplificam as equações.
+
+\begin{description}
+    \item[1. Incidência Vertical ($\omega > 0, k=0$):]
+    Neste caso, o comprimento de onda horizontal é infinito ($c = \infty$).O acoplamento entre P e SV desaparece.
+    \begin{itemize}
+        \item A Onda P gera apenas movimento vertical ($w$), governado por $c_p^*$.
+        \item A Onda SV gera apenas movimento horizontal ($u$), governado por $c_s^*$.
+    \end{itemize}
+    A matriz de rigidez do semiespaço torna-se diagonal:
+    \begin{equation}
+        [S_{P-SV}^R] = i\omega \rho \begin{bmatrix} c_s^* & 0 \\ 0 & c_p^* \end{bmatrix}
+    \end{equation}
+    Isso confirma que, para incidência vertical, a impedância horizontal é controlada pela velocidade de cisalhamento ($c_s^*$) e a vertical pela velocidade de compressão ($c_p^*$).
+
+    \item[2. Caso Estático ($\omega = 0, k \neq 0$):]
+    As equações convergem para a solução da elastostática para uma carga harmônica espacial. Os termos trigonométricos tornam-se hiperbólicos.
+
+    \item[3. Alta Frequência ($k \to \infty$):]
+    Como no caso SH, a interação entre topo e base desaparece, e a camada comporta-se como um semiespaço.
+\end{description}
+
+\subsection{Camada Carregada (Loaded Layer)}
+
+Assim como no caso SH, podemos ter cargas distribuídas atuando no interior da camada (devido a peso próprio,
+forças de inércia de massas inclusas ou interação estaca-solo). No movimento no plano, essas cargas têm duas componentes:
+\begin{itemize}
+    \item $p(z)$: Carga distribuída horizontal (direção $x$);
+    \item $r(z)$: Carga distribuída vertical (direção $z$).
+\end{itemize}
+
+Assumindo uma variação linear dessas cargas com a profundidade (de $p_1, r_1$ no topo a $p_2, r_2$ na base),
+as equações de equilíbrio dinâmico ganham termos de força não-homogêneos:
+
+\begin{subequations}
+\label{eq:equilibrio_carga_plano}
+\begin{align}
+    \sigma_{x,x} + \tau_{xz,z} &= -\rho\omega^2 u - p(z) \\
+    \tau_{zx,x} + \sigma_{z,z} &= -\rho\omega^2 w - r(z)
+\end{align}
+\end{subequations}
+
+A estratégia de solução é novamente análoga ao \textbf{Método dos Deslocamentos}:
+\begin{enumerate}
+    \item \textbf{Solução Particular (Estado Bloqueado):} Calculamos a resposta da camada assumindo que as interfaces superior e inferior estão perfeitamente engastadas ($u=w=0$ nas bordas).
+    Isso gera reações de apoio nas interfaces ($P^p, R^p$).
+    \item \textbf{Superposição:} Para obter a resposta real, aplicamos essas reações com sinal invertido nas interfaces do sistema global (Eq. \ref{eq:sistema_camada_psv}).
+\end{enumerate}
+
+As amplitudes das reações de engastamento perfeito ($P^p, R^p$) são obtidas resolvendo o sistema de equações diferenciais para a variação linear de carga,
+resultando em expressões algébricas (Eqs. 5.146 do livro) que dependem da rigidez complexa e da frequência.
+
+\subsection{Taxa de Transmissão de Energia}
+
+A análise do fluxo de energia é mais rica no caso do movimento no plano do que no caso SH.
+Agora, a energia pode ser transmitida horizontalmente através de dois mecanismos distintos:
+\begin{enumerate}
+    \item \textbf{Trabalho Normal:} A tensão normal horizontal $\sigma_x$ realizando trabalho sobre a velocidade horizontal $\dot{u}$.
+    \item \textbf{Trabalho de Cisalhamento:} A tensão de cisalhamento vertical $\tau_{zx}$ realizando trabalho sobre a velocidade vertical $\dot{w}$.
+\end{enumerate}
+
+A taxa de transmissão de energia horizontal $N$ é calculada integrando a soma dessas potências ao longo da profundidade da camada $d$ e tirando a média temporal num período $T = 2\pi/\omega$:
+
+\begin{equation}
+    N = -\frac{1}{2} \int_{0}^{d} \text{Re} \left[ \sigma_x(z) \overline{\dot{u}(z)} + \tau_{zx}(z) \overline{\dot{w}(z)} \right] dz \label{eq:energia_plano}
+\end{equation}
+
+(Nota: A barra sobre a velocidade indica o conjugado complexo, uma forma padrão de calcular potência média em fasores, equivalente à formulação integral do livro).
+
+\textbf{Interpretação Física:}
+Esta equação mostra que a atenuação da vibração com a distância depende de como as ondas P e SV interagem.
+Diferente do caso SH, onde só havia cisalhamento, aqui a rigidez à compressão (associada a $\sigma_x$) também joga um papel fundamental no transporte de energia para longe da fonte.
