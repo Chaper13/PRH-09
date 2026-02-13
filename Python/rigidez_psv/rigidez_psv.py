@@ -178,12 +178,6 @@ def calcular_propriedades_dinamicas_locais(props, omega, k_global=None):
 
     Returns:
         dict: Dicionário com propriedades dinâmicas calculadas.
-
-    Referências:
-        Wolf, J.P. (1985). Dynamic Soil-Structure Interaction.
-        - Seção 5.2.4: Princípio da Correspondência
-        - Eq. 5.128: Definição de s e t
-        - Seção 5.4.3: Casos especiais (k=0, ω=0)
     """
     d      = props.get('d', 0.0)
     G_real = props.get('G', 20000.0)
@@ -251,9 +245,6 @@ def calcular_matriz_camada_vertical(params, omega):
     Raises:
         ValueError: Se sin(ωd/cs*) ou sin(ωd/cp*) ≈ 0 (frequência de ressonância
                     da camada), tornando cot e csc numericamente indefinidos.
-
-    Referências:
-        Wolf (1985), Eq. 5.136a, p. 152.
     """
     G   = params['G_complex']
     cp  = params['cp_star']
@@ -267,7 +258,6 @@ def calcular_matriz_camada_vertical(params, omega):
     sin_s = cmath.sin(arg_s)
     sin_p = cmath.sin(arg_p)
 
-    # ── CORREÇÃO: proteção contra frequências de ressonância ──────────
     # sin(ωd/cs*) = 0 ocorre em ω = n·π·cs*/d (ressonâncias da camada S)
     # sin(ωd/cp*) = 0 ocorre em ω = n·π·cp*/d (ressonâncias da camada P)
     # Nesses pontos, cot = cos/sin e csc = 1/sin divergem → resultado inválido.
@@ -328,9 +318,6 @@ def calcular_matriz_camada_estatica(params, k):
 
     Raises:
         ValueError: Se o denominador D ≈ 0 (configuração degenerada de k e d).
-
-    Referências:
-        Wolf (1985), Table 5-4, Eq. 5.137a, p. 152-153.
     """
     G   = params['G_complex']
     cp  = params['cp_star']
@@ -346,7 +333,6 @@ def calcular_matriz_camada_estatica(params, k):
     # Denominador D (Tabela 5-4)
     D = (1 + r)**2 * sinh_kd**2 - kd**2 * (1 - r)**2
 
-    # ── CORREÇÃO: proteção contra D = 0 ──────────────────────────────
     # D = 0 ocorre quando (1+r)·sinh(kd) = ±(1-r)·kd, o que é possível
     # para certos pares (k, d, nu). Nesse caso, fator = 2kG/D → diverge.
     if abs(D) < TOL_DENOM:
@@ -400,9 +386,6 @@ def calcular_matriz_camada_estatica_k0(params):
 
     Returns:
         numpy.ndarray: Matriz 4x4 complexa [kPa] (Eq. 5.138a).
-
-    Referências:
-        Wolf (1985), Eq. 5.138a, p. 153.
     """
     G   = params['G_complex']
     cp  = params['cp_star']
@@ -452,13 +435,6 @@ def calcular_matriz_camada(params, k, omega=None):
     Raises:
         ValueError: Se s·t for degenerado (≈ 0) no caso geral, ou se as funções
                     especializadas detectarem denominadores inválidos.
-
-    Referências:
-        Wolf, J.P. (1985). Dynamic Soil-Structure Interaction.
-        - Tabela 5-3: Caso geral ω > 0, k > 0
-        - Eq. 5.136a: ω > 0, k = 0
-        - Tabela 5-4 / Eq. 5.137a: ω = 0, k ≠ 0
-        - Eq. 5.138a: ω = 0, k = 0
     """
     omega_val = omega if omega is not None else 0.0
 
@@ -543,13 +519,6 @@ def calcular_matriz_semiespaco(params, k, omega=None):
 
     Returns:
         numpy.ndarray: Matriz de rigidez 2x2 complexa [kPa].
-
-    Referências:
-        Wolf, J.P. (1985). Dynamic Soil-Structure Interaction.
-        - Eq. 5.135: Caso geral ω > 0, k > 0
-        - Eq. 5.136b: ω > 0, k = 0
-        - Eq. 5.137b: ω = 0, k ≠ 0
-        - Eq. 5.138b: ω = 0, k = 0
     """
     omega_val = omega if omega is not None else 0.0
 
@@ -609,11 +578,6 @@ def montar_sistema_global(dados_json, omega, angulo_graus, gl_total):
 
     Returns:
         tuple: (K_global, k_global, dados_validacao)
-
-    Referências:
-        Wolf, J.P. (1985). Dynamic Soil-Structure Interaction.
-        - Seção 5.3: Montagem de sistema multi-camadas
-        - Seção 5.4.3: Casos especiais
     """
     camadas     = dados_json['camadas']
     semi_espaco = dados_json.get('semi_espaco')
@@ -675,11 +639,6 @@ def montar_sistema_global_por_k(dados_json, omega, k_global, gl_total):
 
     Returns:
         tuple: (K_global, k_global, dados_validacao)
-
-    Referências:
-        Wolf, J.P. (1985). Dynamic Soil-Structure Interaction.
-        - Seção 5.3: Montagem de sistema multi-camadas
-        - Seção 5.4.3: Casos especiais
     """
     camadas     = dados_json['camadas']
     semi_espaco = dados_json.get('semi_espaco')
@@ -805,11 +764,9 @@ def salvar_resultados(resultados, arquivo_saida, omega, num_camadas,
         f.write(f"  Dimensao matriz ..: {num_gl} x {num_gl}\n")
         if modo == 'angulos':
             f.write(f"  Modo .............: Angulos de incidencia\n")
-            # ── CORREÇÃO: usa _resumir_valores_log em vez de despejar a lista ──
             f.write(f"  Angulos [graus] ..: {_resumir_valores_log(valores_entrada)}\n")
         else:
             f.write(f"  Modo .............: k_global direto\n")
-            # ── CORREÇÃO: usa _resumir_valores_log em vez de despejar a lista ──
             f.write(f"  k_global [rad/m] .: {_resumir_valores_log(valores_entrada)}\n")
         f.write("\n" + "=" * 80 + "\n\n")
         f.writelines(resultados)
@@ -839,7 +796,6 @@ def _resumir_valores_log(valores, n_limiar=5):
     if n <= n_limiar:
         return str(valores)
 
-    # ── CORREÇÃO: min/max correto por tipo ────────────────────────────
     # Para floats (ângulos): usa min/max direto para preservar sinal.
     # Para complex: usa abs() pois não há ordenação natural.
     eh_complex = isinstance(valores[0], complex) and valores[0].imag != 0
@@ -874,7 +830,6 @@ def _resolver_valores(analise, modo):
         inicio = float(valores_raw["inicio"])
         fim    = float(valores_raw["fim"])
         passo  = float(valores_raw["passo"])
-        # ── CORREÇÃO: log removido daqui (estava duplicando e quebrando a ordem) ──
         valores_expandidos = np.arange(inicio, fim + passo / 2, passo).tolist()
     else:
         valores_expandidos = valores_raw
@@ -934,7 +889,6 @@ def executar_loop_angulos(dados, omega, angulos_teste, num_gl, **kwargs):
         ncols=80,
         bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]'
     ):
-        # ── CORREÇÃO: captura ValueError com contexto do caso ─────────
         try:
             K_total, k_calc, debug = montar_sistema_global(dados, omega, angulo, num_gl)
         except ValueError as e:
@@ -965,7 +919,6 @@ def executar_loop_k_global(dados, omega, k_globais_teste, num_gl, **kwargs):
         bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}]'
     ):
         k_complex = complex(k)
-        # ── CORREÇÃO: captura ValueError com contexto do caso ─────────
         try:
             K_total, k_calc, debug = montar_sistema_global_por_k(dados, omega, k_complex, num_gl)
         except ValueError as e:
