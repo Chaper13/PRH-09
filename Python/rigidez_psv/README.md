@@ -1,1 +1,0 @@
-[![Abrir no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Chaper13/rigidez_psv/blob/main/rigidez_psv.ipynb)
