@@ -1,0 +1,15 @@
+{
+  "descricao": "Perfil de Solo",
+
+  "analise": {
+    "omega"  : 10.0,
+    "modo"   : "k_global",
+    "valores": [0.02, 0.03]
+  },
+
+  "camadas": [
+    {"id": 1, "d": 2.0, "G": 10000.0, "nu": 0.40, "rho": 1.70, "zeta_p": 0.050, "zeta_s": 0.050}
+  ],
+
+  "semi_espaco": {"G": 300000.0, "nu": 0.25, "rho": 2.50, "zeta_p": 0.010, "zeta_s": 0.010}
+}
