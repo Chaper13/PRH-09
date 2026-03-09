@@ -1,16 +1,29 @@
 {
-  "descricao": "Perfil de Solo",
-
   "analise": {
     "omega"        : 10.0,
     "modo"         : "k_global",
-    "valores"      : {"inicio": 0, "fim": 8, "passo": 0.001 },
-    "arquivo_saida": "SAIDA_Rigidez_Global.txt"
+    "valores"      : {"inicio": 0, "fim": 8, "passo": 0.001}
+  },
+
+  "carregamento": {
+    "p0"    : 0.0,
+    "r0"    : 1.0,
+    "delta_b": 2.5
+  },
+
+  "discretizacao_x": {
+    "inicio": 0.0,
+    "passo" : 0.125,
+    "fim"   : 5.0
   },
 
   "camadas": [
-    {"id": 1, "d": 10.0, "G": 20000.0, "nu": 0.33, "rho": 2.00, "zeta_p": 0.02, "zeta_s": 0.02}
+    {"id": 1, "d": 10.0, "G": 20000.0, "nu": 0.33,
+     "rho": 2.0, "zeta_p": 0.02, "zeta_s": 0.02}
   ],
 
-  "semi_espaco": {"G": 100000.0, "nu": 0.25, "rho": 2.40, "zeta_p": 0.010, "zeta_s": 0.010}
+  "semi_espaco": {
+    "G": 100000.0, "nu": 0.25,
+     "rho": 2.4, "zeta_p": 0.01, "zeta_s": 0.01
+  }
 }

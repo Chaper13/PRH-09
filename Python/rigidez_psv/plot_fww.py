@@ -25,7 +25,7 @@ K_PASSO  = 0.001
 
 # Limite de visualização no eixo x do gráfico [rad/m]
 # (não afeta o cálculo — apenas o zoom do plot)
-# Use None para exibir o intervalo completo calculado.
+# Usar None para exibir o intervalo completo calculado.
 K_XLIM_PLOT = 0.2
 
 # Arquivo JSON do modelo (mesmo usado no código principal)
@@ -88,7 +88,7 @@ def calcular_F11_vs_k(arquivo_json, omega, k_inicio, k_fim, k_passo):
         k_g          = k_cplx[idx_geral]
         s_all, t_all = calcular_s_t_vetorizado(mat_props, omega, k_g)
         K_batch      = montar_K_global_vetorizado(
-            mat_props, s_all, t_all, k_g, omega, num_gl
+            mat_props, s_all, t_all, k_g, num_gl
         )
         for bi, oi in enumerate(idx_geral):
             try:
